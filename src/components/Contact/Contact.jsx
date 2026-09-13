@@ -1,139 +1,111 @@
 'use client';
-import React, { useState } from 'react';
-import { Client, Databases, ID } from 'appwrite';
-import { Heading } from '../Macros/Atoms';
+import React from 'react';
+import { FaGithub, FaInstagram, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 
 const ContactComponent = () => {
-    const [formData, setFormData] = useState({
-        Name: '',
-        Email: '',
-        Message: '',
-    });
-    const [message, setMessage] = useState({
-        type: '',
-        content: '',
-    });
+    const email = 'shreyansmehta362@gmail.com';
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const client = new Client()
-            .setEndpoint('https://cloud.appwrite.io/v1')
-            .setProject('65686ac6e7cacf6b3360'); // Replace with your Appwrite project ID
-
-        const databases = new Databases(client);
-
-        try {
-            const response = await databases.createDocument(
-                '65686b2f1c70523998cb', // Replace with your Appwrite database ID
-                '65686b3f91213bea400b', // Replace with your collection ID
-                ID.unique(),
-                formData
-            );
-
-            setMessage({
-                type: 'success',
-                content: 'Form submitted successfully!',
-            });
-            console.log('Contact form submitted:', response);
-            // You can add a success message or redirect the user to a thank-you page.
-        } catch (error) {
-            console.error('Error submitting contact form:', error);
-            setMessage({
-                type: 'error',
-                content: 'Error submitting form. Please try again later.',
-            });
-            // Handle the error, e.g., show an error message to the user.
+    const socialLinks = [
+        {
+            name: 'GitHub',
+            icon: <FaGithub className="text-2xl" />,
+            url: 'https://github.com/mehtashreyans3602',
+            color: 'group-hover:text-white'
+        },
+        {
+            name: 'LinkedIn',
+            icon: <FaLinkedinIn className="text-2xl" />,
+            url: 'https://www.linkedin.com/in/shreyans-mehta-4b406a1b3/',
+            color: 'group-hover:text-blue-400'
+        },
+        {
+            name: 'Instagram',
+            icon: <FaInstagram className="text-2xl" />,
+            url: 'https://www.instagram.com/shreyans3602/',
+            color: 'group-hover:text-pink-400'
         }
-    };
-
-    const handleCloseMessage = () => {
-        setMessage({
-            type: '',
-            content: '',
-        });
-    };
+    ];
 
     return (
-        <div className="pb-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black via-blue-950 to-black">
-            <div className="text-5xl text-center text-white items-center justify-center p-4">
-            <Heading textValue={"Contact"}/>
-            </div>
-            <div className='drop-shadow-lg backdrop-blur-2xl rounded-lg'>
-                <div className="flex flex-col drop-shadow-lg backdrop-blur-2xl backdrop-brightness-90 p-8 rounded-lg ring-2 shadow-md md:w-96 w-80">
-                    <div className="text-xl text-center items-center justify-center p-4">
-                        <div className="flex items-center justify-center">
-                            <h1 className="p-4 border-b-4 border-blue-800 text-white">Let&apos;s Collaborate</h1>
-                        </div>
-                    </div>
-                    {message.type && (
-                        <div className={`mt-4 p-4 bg-${message.type === 'success' ? 'green' : 'red'}-100 rounded-md relative`}>
-                            <p className={`text-${message.type === 'success' ? 'green' : 'red'}-700`}>
-                                {message.content}
-                            </p>
-                            <button
-                                onClick={handleCloseMessage}
-                                className="absolute top-0 right-0 p-2 cursor-pointer"
-                            >
-                                &#x2715;
-                            </button>
-                        </div>
-                    )}
-                    <form className="space-y-4" onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="Name" className="block text-sm font-medium text-gray-100">
-                                Name
-                            </label>
-                            <input
-                                type="text"
-                                id="Name"
-                                name="Name"
-                                value={formData.Name} // Add value attribute
-                                onChange={handleChange} // Add onChange event handler
-                                className="mt-1 py-2 px-4 w-full border rounded-lg bg-white/20 backdrop-blur-lg"
-                                placeholder="Your Name"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="Email" className="block text-sm font-medium text-gray-100">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="Email"
-                                name="Email"
-                                value={formData.Email} // Add value attribute
-                                onChange={handleChange} // Add onChange event handler
-                                className="mt-1 py-2 px-4 w-full border rounded-lg bg-white/20 backdrop-blur-lg"
-                                placeholder="Your Email"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="Message" className="block text-sm font-medium text-gray-100">
-                                Message
-                            </label>
-                            <textarea
-                                id="Message"
-                                name="Message"
-                                value={formData.Message} // Add value attribute
-                                onChange={handleChange} // Add onChange event handler
-                                rows="4"
-                                className="mt-1 py-2 px-4 w-full border rounded-lg bg-white/20 backdrop-blur-lg"
-                                placeholder="Your Message"
-                            ></textarea>
-                        </div>
-                        <button
-                            type="submit"
-                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-                        >
-                            Send Message
-                        </button>
-                    </form>
+        <div className="w-full bg-black text-white py-24 px-6 md:px-16 flex flex-col items-center justify-center">
 
+            {/* Section Header */}
+            <div className="w-full max-w-5xl mb-12 flex flex-col items-start">
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">
+                    LET&apos;S<span className="text-neutral-500">.CONNECT</span>
+                </h1>
+                <div className="h-1 w-20 bg-blue-600 rounded-full mt-4"></div>
+                <p className="text-neutral-500 text-sm mt-4">
+                    Have a project in mind or just want to say hi? Feel free to reach out.
+                </p>
+            </div>
+
+            {/* MAIN BENTO CARD */}
+            <div className="w-full max-w-5xl bg-neutral-900 border border-neutral-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+
+                {/* Ambient Background Glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+
+                <div className="relative z-10 flex flex-col md:flex-row gap-12 md:gap-16 items-start md:items-center">
+
+                    {/* Left Side: Primary CTA */}
+                    <div className="flex-1 flex flex-col items-start">
+                        <span className="px-4 py-1.5 bg-green-900/30 text-green-400 rounded-full text-xs font-medium border border-green-800/50 flex items-center gap-2 mb-6">
+                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Available for work
+                        </span>
+
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
+                            Let&apos;s build<br />
+                            something <span className="text-neutral-500">great.</span>
+                        </h2>
+                        <p className="text-neutral-400 text-sm leading-relaxed mb-8 max-w-sm">
+                            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                        </p>
+
+                        {/* Email Button */}
+                        <a
+                            href={`mailto:${email}`}
+                            className="group flex items-center gap-3 px-6 py-4 bg-white text-black rounded-full font-bold text-sm hover:bg-neutral-200 transition-all duration-300"
+                        >
+                            <FaEnvelope className="text-lg" />
+                            <span>Drop me an Email</span>
+                        </a>
+                    </div>
+
+                    {/* Divider (Desktop only) */}
+                    <div className="hidden md:block w-[1px] h-48 bg-neutral-800"></div>
+                    {/* Divider (Mobile only) */}
+                    <div className="block md:hidden w-full h-[1px] bg-neutral-800"></div>
+
+                    {/* Right Side: Social Grid */}
+                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-3 w-full">
+                        {socialLinks.map((social) => (
+                            <a
+                                key={social.name}
+                                href={social.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group flex items-center justify-between p-4 bg-black border border-neutral-800 rounded-2xl hover:border-neutral-600 hover:bg-neutral-800/50 transition-all duration-300"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <span className={`text-neutral-500 transition-colors duration-300 ${social.color}`}>
+                                        {social.icon}
+                                    </span>
+                                    <span className="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
+                                        {social.name}
+                                    </span>
+                                </div>
+                                {/* Arrow */}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-4 w-4 text-neutral-600 transform group-hover:translate-x-1 group-hover:text-white transition-all duration-300"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

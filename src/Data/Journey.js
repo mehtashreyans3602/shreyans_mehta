@@ -13,23 +13,18 @@ const Journey = [
   },
 
   {
-    company: "Amor Inventions",
-    positionTime:
-      "Web Developer Intern (June 2020 - August 2020)",
-    desc: "Spearheaded the seamless integration of dynamic and user-centric Vue.js web pages into the robust Django framework, elevating the overall functionality and aesthetic appeal of the 'LoveMySkool' web application",
-  },
-  {
     company: "Parul Institute of Engineering and Technology",
     positionTime:
       "Computer Science and Engineering Student (July 2021 - Currently)",
-    desc: "Pursuing Bachelor's Degree in Computer Science",
+    desc: "Completed My Bachelor's Degree in Computer Science with 7.67 CGPA",
   },
   {
-    company: "Agrem Technosol Ltd.",
+    company: "OVGU Magdeburg",
     positionTime:
-      "Freelance Software Developer (May 2023 - July 2023)",
-    desc: "During my time as a FreeLancer at Agrem Technosol, I had to develop sensor code as well as an Interface using .Net Technology which would interact with the Military Grade Depth Pressure Sensor made for Indian Navy. While I working there, I got to learn more about Socket Programming, C# and Sensor code development using c and c++. During my second month in the Company, I had been given a task to improve their existing website. For that, I had developed the entire website made using Next.js",
+      "MSc. Digital Engineering (March 2025 - Currently)",
+    desc: "Currently pursuing my Master's Degree in Digital Engineering with a focus on advanced computing and software development.",
   },
+
 ];
 
 export default Journey;

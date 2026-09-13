@@ -2,39 +2,54 @@
 import { useState } from "react";
 import Data from "@/Data/projectData";
 import ProjectCard from "./ProjectCard";
-import { Heading } from "../Macros/Atoms";
 
 const FilterButton = ({ filter, activeFilter, onChange }) => {
     const isActive = filter === activeFilter;
 
     return (
-        <div className="p-2">
-            <button
-            className={`px-4 py-2 min-w-max w-auto text-sm rounded-full text-white ${isActive ? 'bg-blue-500 ' : 'border-blue-500'} border-2 transition-all ease-in duration-250 hover:bg-blue-600/30 md:hover:border-transparent focus:outline-none focus:shadow-outline-blue`}
+        <button
+            className={`px-5 py-2.5 min-w-max text-sm font-medium rounded-full transition-all duration-300 ease-in-out border
+                ${isActive
+                    ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-900/50'
+                    : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 hover:bg-neutral-800'
+                }`}
             onClick={() => onChange(filter)}
         >
             {filter}
         </button>
-        </div>
     );
 };
+
 const ProjectComponent = () => {
+    // Sort data
     const SortedData = [...Data].sort((a, b) => a.ProjectName.localeCompare(b.ProjectName));
 
     const [activeFilter, setActiveFilter] = useState('Best-Work');
-    const filteredProjects = activeFilter === 'Best-Work' ? SortedData : SortedData.filter(project => project.Area.includes(activeFilter));
+
+    // Filter data
+    const filteredProjects = activeFilter === 'Best-Work'
+        ? SortedData
+        : SortedData.filter(project => project.Area.includes(activeFilter));
 
     const handleFilterChange = (filter) => {
         setActiveFilter(filter);
     };
+
     return (
-        <div className="flex flex-col items-center justify-center text-center bg-gradient-to-b from-black via-blue-950 to-black w-full">
-            <div className="text-5xl text-center text-white items-center justify-center md:p-4 md:m-4">
-            <Heading textValue={"Project"}/>
+        <div className="flex flex-col items-center justify-center w-full bg-black text-white py-16 md:py-24">
+
+            {/* Header Section */}
+            <div className="w-full max-w-6xl px-4 md:px-8 mb-10 flex flex-col items-start">
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">
+                    ALL<span className="text-neutral-500">.PROJECTS</span>
+                </h1>
+                <div className="h-1 w-20 bg-blue-600 rounded-full mt-4"></div>
             </div>
 
-            <div className="w-full m-4">
-                <div className="flex md:justify-center justify-start md:space-x-4 space-x-2 overflow-scroll">
+            {/* Filter Bar */}
+            <div className="w-full max-w-6xl px-4 md:px-8 mb-8">
+                {/* Scrollable container for mobile, centered on desktop */}
+                <div className="flex md:justify-center justify-start gap-3 overflow-x-auto pb-4 hide-scrollbar whitespace-nowrap">
                     <FilterButton filter="Best-Work" activeFilter={activeFilter} onChange={handleFilterChange} />
                     <FilterButton filter="FullStack" activeFilter={activeFilter} onChange={handleFilterChange} />
                     <FilterButton filter="FrontEnd" activeFilter={activeFilter} onChange={handleFilterChange} />
@@ -43,14 +58,38 @@ const ProjectComponent = () => {
                     <FilterButton filter="Web3" activeFilter={activeFilter} onChange={handleFilterChange} />
                 </div>
             </div>
-            <div className="md:m-4 overflow-hidden">
-                <div className="md:m-4 md:px-4 grid md:grid-cols-3 grid-flow-row md:gap-24 justify-start md:overflow-x-scroll">
-                    {filteredProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
-                    ))}
-                </div>
+
+            {/* Projects Grid */}
+            <div className="w-full max-w-6xl px-4 md:px-8">
+                {filteredProjects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                        {filteredProjects.map((project, index) => (
+                            <ProjectCard key={index} project={project} />
+                        ))}
+                    </div>
+                ) : (
+                    // Empty State (if filter returns no results)
+                    <div className="w-full flex flex-col items-center justify-center py-20 bg-neutral-900 border border-neutral-800 rounded-3xl">
+                        <span className="text-4xl mb-4">🔍</span>
+                        <h3 className="text-xl font-bold text-white mb-2">No projects found</h3>
+                        <p className="text-neutral-500 text-sm">Try selecting a different filter.</p>
+                    </div>
+                )}
             </div>
+
+            {/* CSS to hide scrollbar for mobile filter row */}
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                .hide-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .hide-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}} />
         </div>
     )
 }
+
 export default ProjectComponent;

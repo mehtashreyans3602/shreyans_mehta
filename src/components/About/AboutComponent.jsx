@@ -1,59 +1,133 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import DefaultImage from '@/Assets/Images/shreyans.jpg';
-import HoverImage from '@/Assets/Images/shreyans2.jpg'; // Replace 'other-image.jpg' with the actual filename of your hover image
+import DefaultImage from '@/Assets/Images/shreyans.jpeg';
 import ResumeComponent from '../Resume/ResumeComponent';
-import { Heading } from '../Macros/Atoms';
+
 const AboutComponent = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  // Extracted from your bio for the "Tech Stack" pill section
+  const techStack = [
+    "Python", "Java", "C++", "React", "Next.js",
+    "TypeScript", "Node.js", "Django", "Flask",
+    "OpenCV", "Data Science"
+  ];
 
   return (
-    <>
-      <div className="w-full items-center justify-center text-center">
-        <div className="text-5xl text-center text-white items-center justify-center p-4 ">
-        <Heading textValue={"About"}/> 
-        </div>
-        <div className="flex md:flex-row flex-col justify-around items-center gap-y-4 p-4">
-          <div className="aspect-square p-4">
-            <Image
-              width={500}
-              height={100}
-              className={`rounded-full border-8 border-blue-800 hover:border-white ${isHovered ? 'hovered-image' : ''
-                }`}
-              src={isHovered ? HoverImage : DefaultImage}
-              alt=""
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            />
-          </div>
-          <div className="">
+    <div className="w-full min-h-screen bg-black text-white p-4 md:p-8 flex flex-col items-center justify-center font-sans">
 
-            <div className="ml-10 flex flex-col max-w-3xl text-start items-start">
-              <p className=" text-white text-lg">Software Engineer | IBM Certified DataScientist | FullStack Developer | IOT Developer.
-              </p><br />
-              <p className=" text-white text-lg text-justify">Here&apos;s My Story:</p>
-              <p className=" text-white text-lg">
-                I started out with C, C++ and java just like regular software engineering students,
-                after which I started learning python and made 2 games with it (Flappy Bird and Space Invaders) and final year diploma project I had made a FireFighting Robot Prototype with an interface which perform Face Recognition and Image Processing with opencv to identify people. Furthermore, I started web development with flask and django framework and did an internship where I had to learn Vue.js and apply my existing knowledge of django.
-                This concluded my Diploma.
-              </p>
-              <p className=" text-white text-lg">
-                While pursuing my Bachelor&apos;s I developed a knack for learning different technologies and I started learning DataScience and got certified by Coursera&apos;s IBM DataScience Professional Course. After that, I started learning about .NET Development and C# development.
-                And at the end, I chose to develop a MERN Application for my final year project, where I learned typescript, REACT and Next.js.
-              </p>
-              <p className=" text-white text-lg">
-                Subsequently, I have also participated in several hackathons and attended meetups too.
-              </p>
-
-              <ResumeComponent />
-
-            </div>
-
-          </div>
-        </div>
+      {/* Header */}
+      <div className="w-full max-w-6xl mb-8">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
+          ABOUT<span className="text-neutral-500">.ME</span>
+        </h1>
       </div>
-    </>
+
+      {/* MASTER BENTO GRID CONTAINER */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl auto-rows-min">
+
+        {/* 1. MAIN BIO CARD */}
+        <div className="md:col-span-2 bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+
+          <div className="z-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3">
+              <span className="bg-blue-600 w-3 h-3 rounded-full animate-pulse"></span>
+              Hello, I build things.
+            </h2>
+
+            <div className="space-y-4 text-neutral-300 leading-relaxed text-sm md:text-base">
+              <p>
+                I began my journey like most software engineering students — with <span className="text-white font-semibold">C, C++, and Java</span>. From there, I moved into <span className="text-white font-semibold">Python</span>, building games and a FireFighting Robot prototype featuring face recognition using OpenCV.
+              </p>
+              <p>
+                During my Bachelor&apos;s, I developed a passion for diverse technologies. I earned the <span className="text-blue-400 font-semibold">IBM Data Science Certificate</span>, explored .NET, and ultimately built a <span className="text-white font-semibold">MERN application</span> for my final year project using TypeScript, React, and Next.js.
+              </p>
+              <p className="text-neutral-500 italic mt-4 border-l-2 border-neutral-700 pl-4">
+                &quot;Always eager to learn, build, and collaborate.&quot;
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3 z-10">
+            <span className="px-4 py-1.5 bg-neutral-800 rounded-full text-xs font-medium text-neutral-300 border border-neutral-700">
+              📍 Based in India
+            </span>
+            <span className="px-4 py-1.5 bg-green-900/30 text-green-400 rounded-full text-xs font-medium border border-green-800/50 flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Available for work
+            </span>
+          </div>
+        </div>
+
+        {/* 2. PROFILE IMAGE CARD */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden relative min-h-[300px] group">
+          <Image
+            src={DefaultImage}
+            alt="Shreyans"
+            fill
+            className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+
+          <div className="absolute bottom-0 left-0 p-6 z-10 w-full">
+            <h3 className="text-xl font-bold text-white">Shreyans</h3>
+            <p className="text-sm text-blue-400 font-mono">@developer</p>
+          </div>
+        </div>
+
+        {/* 3. TECH STACK CARD */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 row-span-1 md:row-span-2 flex flex-col">
+          <div className="mb-4">
+            <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-2">Tech Stack</h3>
+            <div className="h-1 w-12 bg-white rounded"></div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 content-start">
+            {techStack.map((tech, i) => (
+              <span key={i} className="px-3 py-1 bg-black border border-neutral-800 text-neutral-400 text-xs rounded-lg hover:text-white hover:border-neutral-500 transition-colors cursor-default">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-auto pt-6">
+            <div className="p-4 bg-neutral-800/50 rounded-2xl border border-neutral-700/50">
+              <p className="text-xs text-neutral-400 font-mono">
+                &quot;How do I center a div again?&quot;
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. RESUME CARD */}
+        <div className="bg-gradient-to-br from-blue-900 to-indigo-900 border border-blue-800 rounded-3xl p-6 flex flex-col justify-between min-h-[200px] relative overflow-hidden group">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+
+          <div className="z-10 relative">
+            <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 border border-white/20">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">Resume</h3>
+            <p className="text-blue-200 text-sm">View my full professional history and skills.</p>
+          </div>
+
+          <div className="z-10 mt-4">
+            <div className="bg-black/30 backdrop-blur-sm rounded-xl p-2 inline-block hover:bg-black/50 transition-colors">
+              <ResumeComponent />
+            </div>
+          </div>
+        </div>
+
+        {/* 5. STATUS/JOURNEY SUMMARY CARD */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center">
+          <h3 className="text-neutral-500 text-sm font-bold uppercase tracking-widest mb-1">Currently Learning</h3>
+          <p className="text-3xl font-bold text-white mb-2">Rust</p>
+          <p className="text-xs text-neutral-400">Exploring systems programming & performance.</p>
+        </div>
+
+      </div>
+    </div>
   );
 };
 

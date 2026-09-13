@@ -1,77 +1,152 @@
 'use client';
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import shreyans_logo from "@/Assets/Images/shreyans_logo.png";
+import Image from "next/image";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter(); // Move the useRouter hook inside the component
+  const [activeSection, setActiveSection] = useState('home');
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  // Minimal link styles
+  const linkStyle = "px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-full cursor-pointer";
+  const activeStyle = "text-white bg-neutral-800";
+  const inactiveStyle = "text-neutral-400 hover:text-white hover:bg-neutral-800/50";
+
+  const navLinks = [
+    { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
+    { name: 'Credentials', id: 'credentials' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Contact', id: 'contact' }
+  ];
+
+  // Smooth scroll handler
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setMenuOpen(false);
   };
 
-  const linkStyle = "px-4 py-2 md:hover:border-b-2 md:hover:border-b-white md:hover:bg-gradient-to-t from-white/30 border-t-0 to-transparent transition-all ease-out duration-350 border-2 border-transparent rounded";
+  // Detect active section on scroll
+  useEffect(() => {
+    const sections = navLinks.map(link => document.getElementById(link.id));
 
-  // Move the isActive function inside the component
-  const isActive = (pathname) => router.pathname === pathname;
-  // const isActive = () => {"/"}
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach(section => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
+
   return (
     <>
-      <div
-        style={{ maxWidth: "100%" }}
-        className="sticky top-0 drop-shadow-lg backdrop-blur-2xl w-full z-10"
-      >
-        <div className="flex md:justify-around justify-between p-4 items-center text-lg backdrop-blur-2xl text-white">
-          <div>
-            <Link href="/">
-              <span className="font-semibold">Shreyans</span>
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <div className="flex justify-between text-white m-2 backdrop-blur-2xl ">
-              <Link href="/" className={`mx-2 ${linkStyle} ${isActive('/') ? "bg-blue-800" : ""}`}>
-                Home
-              </Link>
-              <Link href="/About" className={`mx-2 ${linkStyle} ${isActive('/About') ? "bg-blue-800" : ""}`}>
-                About
-              </Link>
-              <Link href="/Project" className={`mx-2 ${linkStyle} ${isActive('/Project') ? "bg-blue-800" : ""}`}>
-                Projects
-              </Link>
-              <Link href="/Contact" className={`mx-2 ${linkStyle} ${isActive('/Contact') ? "bg-blue-800" : ""}`}>
-                Contact
-              </Link>
-            </div>
+      {/* FLOATING BOTTOM NAVIGATION BAR */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto">
+
+        {/* The outer wrapper now transitions between pill and card shape */}
+        <div
+          className={`bg-neutral-900/90 backdrop-blur-xl border border-neutral-800 shadow-2xl p-2 transition-all duration-300 ${menuOpen ? 'rounded-3xl' : 'rounded-full'
+            }`}
+        >
+
+          {/* ============================== */}
+          {/* DESKTOP LAYOUT (Single Row)     */}
+          {/* ============================== */}
+          <div className="hidden md:flex items-center gap-1">
+
+            {/* Logo */}
+            <button
+              onClick={(e) => handleScroll(e, 'home')}
+              className="flex-shrink-0 px-2"
+            >
+              <span className="w-10 h-10 overflow-hidden flex items-center justify-center rounded-full bg-neutral-800 border border-neutral-700 hover:border-neutral-500 transition-colors">
+                <Image src={shreyans_logo} alt="Shreyans Logo" className="w-6 h-6 object-contain" />
+              </span>
+            </button>
+
+            {/* Links */}
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={(e) => handleScroll(e, link.id)}
+                className={`${linkStyle} ${activeSection === link.id ? activeStyle : inactiveStyle}`}
+              >
+                {link.name}
+              </button>
+            ))}
           </div>
 
-          {menuOpen ? (
-            <div className="md:hidden fixed top-0 left-0 w-full h-screen bg-black bg-opacity-100">
-              <div className="flex justify-end p-4">
-                <button className="text-white" onClick={toggleMenu}>
-                  &times;
-                </button>
-              </div>
-              <div className="flex flex-col items-center text-white">
-                <Link href="/" className={`my-2 ${linkStyle} ${isActive('/') ? "bg-blue-800" : ""}`}>
-                  Home
-                </Link>
-                <Link href="/About" className={`my-2 ${linkStyle} ${isActive('/About') ? "bg-blue-800" : ""}`}>
-                  About
-                </Link>
-                <Link href="/Project" className={`my-2 ${linkStyle} ${isActive('/Project') ? "bg-blue-800" : ""}`}>
-                  Projects
-                </Link>
-                <Link href="/Contact" className={`my-2 ${linkStyle} ${isActive('/Contact') ? "bg-blue-800" : ""}`}>
-                  Contact
-                </Link>
+          {/* ============================== */}
+          {/* MOBILE LAYOUT (Stacked)         */}
+          {/* ============================== */}
+          <div className="md:hidden">
+
+            {/* Top Row: Logo + Hamburger */}
+            <div className="flex items-center justify-between px-2">
+              <button
+                onClick={(e) => handleScroll(e, 'home')}
+                className="flex-shrink-0"
+              >
+                <span className="w-10 h-10 overflow-hidden flex items-center justify-center rounded-full bg-neutral-800 border border-neutral-700">
+                  <Image src={shreyans_logo} alt="Shreyans Logo" className="w-6 h-6 object-contain" />
+                </span>
+              </button>
+
+              <button
+                onClick={toggleMenu}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 text-white border border-neutral-700 hover:bg-neutral-700 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {menuOpen ? '✕' : '☰'}
+              </button>
+            </div>
+
+            {/* Expanding Menu */}
+            <div
+              className={`grid transition-all duration-300 ease-in-out ${menuOpen ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'
+                }`}
+            >
+              <div className="overflow-hidden">
+                <div className="flex flex-col gap-1 pt-2 pb-2 border-t border-neutral-800">
+                  {navLinks.map((link) => (
+                    <button
+                      key={link.id}
+                      onClick={(e) => handleScroll(e, link.id)}
+                      className={`w-full text-center px-4 py-3 text-sm font-medium rounded-2xl transition-colors duration-200 ${activeSection === link.id
+                          ? 'text-white bg-neutral-800'
+                          : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                        }`}
+                    >
+                      {link.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          ) : (<div className="md:hidden flex justify-end p-4">
-            <button className="text-white" onClick={toggleMenu}>
-              &#9776;
-            </button>
-          </div>)}
+
+          </div>
+
         </div>
       </div>
     </>
