@@ -1,8 +1,8 @@
 import { FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
+const roles = ['Full Stack Developer.', 'SQL Developer', "Data Engineer", 'React Developer.', 'Software Engineer.'];
 const Base = () => {
-    const roles = ['Full Stack Developer.', 'SQL Developer', "Data Engineer", 'React Developer.', 'Software Engineer.'];
     const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
     const [prevRoleIndex, setPrevRoleIndex] = useState(null);
 

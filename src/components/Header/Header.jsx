@@ -1,9 +1,15 @@
 'use client';
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import shreyans_logo from "@/Assets/Images/shreyans_logo.png";
 import Image from "next/image";
 
+const navLinks = [
+  { name: 'Home', id: 'home' },
+  { name: 'About', id: 'about' },
+  { name: 'Credentials', id: 'credentials' },
+  { name: 'Projects', id: 'projects' },
+  { name: 'Contact', id: 'contact' }
+];
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -15,13 +21,6 @@ const Header = () => {
   const activeStyle = "text-white bg-neutral-800";
   const inactiveStyle = "text-neutral-400 hover:text-white hover:bg-neutral-800/50";
 
-  const navLinks = [
-    { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Credentials', id: 'credentials' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Contact', id: 'contact' }
-  ];
 
   // Smooth scroll handler
   const handleScroll = (e, id) => {
@@ -134,8 +133,8 @@ const Header = () => {
                       key={link.id}
                       onClick={(e) => handleScroll(e, link.id)}
                       className={`w-full text-center px-4 py-3 text-sm font-medium rounded-2xl transition-colors duration-200 ${activeSection === link.id
-                          ? 'text-white bg-neutral-800'
-                          : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                        ? 'text-white bg-neutral-800'
+                        : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
                         }`}
                     >
                       {link.name}
