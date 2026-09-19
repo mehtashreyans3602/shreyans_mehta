@@ -43,7 +43,7 @@ const ExperienceComponent = () => {
                         <span className="bg-blue-600 w-3 h-3 rounded-full"></span>
                         Internships & Experience
                     </h2>
-                    <p className="text-neutral-500 text-sm mt-1">My professional journey and the experiences I've gained.</p>
+                    <p className="text-neutral-500 text-sm mt-1">My professional journey and the experiences I&apos;ve gained.</p>
                 </div>
             </div>
 

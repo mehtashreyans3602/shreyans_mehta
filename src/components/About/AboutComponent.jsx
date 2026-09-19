@@ -37,13 +37,13 @@ const AboutComponent = () => {
 
             <div className="space-y-4 text-neutral-300 leading-relaxed text-sm md:text-base">
               <p>
-                I began my journey like most software engineering students — with <span className="text-white font-semibold">C, C++, and Java</span>. From there, I moved into <span className="text-white font-semibold">Python</span>, building games and a FireFighting Robot prototype featuring face recognition using OpenCV.
+                I&apos;m the kind of person who reads the docs for fun and falls down rabbit holes at 2am because <span className="text-white font-semibold">I just need to know how it works</span>. New language, new framework, new paradigm — I don&apos;t wait to be taught. I dig in, break things, and figure it out.
               </p>
               <p>
-                During my Bachelor&apos;s, I developed a passion for diverse technologies. I earned the <span className="text-blue-400 font-semibold">IBM Data Science Certificate</span>, explored .NET, and ultimately built a <span className="text-white font-semibold">MERN application</span> for my final year project using TypeScript, React, and Next.js.
+                I&apos;m happiest when I&apos;m <span className="text-white font-semibold">out of my depth</span> — that&apos;s usually where the real learning happens.
               </p>
               <p className="text-neutral-500 italic mt-4 border-l-2 border-neutral-700 pl-4">
-                &quot;Always eager to learn, build, and collaborate.&quot;
+                &quot;Always curious. Always learning.&quot;
               </p>
             </div>
           </div>
@@ -122,8 +122,8 @@ const AboutComponent = () => {
         {/* 5. STATUS/JOURNEY SUMMARY CARD */}
         <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center">
           <h3 className="text-neutral-500 text-sm font-bold uppercase tracking-widest mb-1">Currently Learning</h3>
-          <p className="text-3xl font-bold text-white mb-2">Rust</p>
-          <p className="text-xs text-neutral-400">Exploring systems programming & performance.</p>
+          <p className="text-3xl font-bold text-white mb-2">Transformer Architecture</p>
+          <p className="text-xs text-neutral-400">Exploring Generative AI and NLP.</p>
         </div>
 
       </div>
