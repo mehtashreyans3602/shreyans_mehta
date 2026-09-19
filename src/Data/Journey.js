@@ -2,7 +2,7 @@ const Journey = [
   {
     company: "Baroda High School",
     positionTime:
-      "Class 10",
+      "10 SSC Student (2017-2018)",
     desc: "Completed My Class 10 SSC Examination with 72 percentile.",
   },
   {
