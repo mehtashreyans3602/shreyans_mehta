@@ -1,7 +1,14 @@
 import { ImageResponse } from '@vercel/og'
 
+// NOTE: Edge runtime is intentionally NOT used here.
+// @vercel/og internally uses WebAssembly.compile / dynamic code evaluation,
+// which the Edge Runtime forbids. Running on the default Node.js runtime
+// avoids the "Dynamic Code Evaluation not allowed in Edge Runtime" build error.
 export const config = {
-    runtime: 'edge',
+    unstable_allowDynamic: [
+        '**/node_modules/@vercel/og/**',
+        '**/node_modules/next/dist/compiled/@vercel/og/**',
+    ],
 }
 
 export default function handler() {
@@ -26,7 +33,7 @@ export default function handler() {
                         fontWeight: 700,
                     }}
                 >
-                    Your Name
+                    Shreyans Mehta
                 </div>
 
                 <div
