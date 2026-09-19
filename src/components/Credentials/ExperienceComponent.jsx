@@ -52,7 +52,7 @@ const ExperienceComponent = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full auto-rows-min">
 
                 {/* 1. ACTIVE INTERNSHIP DETAIL CARD */}
-                <div className="md:col-span-2 bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
+                <div className="md:col-span-2 order-3 md:order-none bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
                     <div
                         className={`absolute top-0 right-0 w-64 h-64 ${accentMap[active.accent].glow} rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none`}
                     />
@@ -103,7 +103,7 @@ const ExperienceComponent = () => {
                 </div>
 
                 {/* 2. INTERNSHIP SELECTOR CARD */}
-                <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:row-span-2 flex flex-col">
+                <div className="order-1 md:order-none bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:row-span-2 flex flex-col">
                     <div className="mb-6">
                         <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-2">
                             Timeline
@@ -153,8 +153,21 @@ const ExperienceComponent = () => {
                     </div>
                 </div>
 
-                {/* 3. STATS CARD */}
-                <div className="bg-gradient-to-br from-blue-900 to-indigo-900 border border-blue-800 rounded-3xl p-6 flex flex-col justify-between min-h-[180px] relative overflow-hidden">
+                {/* 3. FOCUS CARD (now dynamic) */}
+                <div className="order-2 md:order-none bg-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center">
+                    <h3 className="text-neutral-500 text-sm font-bold uppercase tracking-widest mb-1">
+                        Focus Area
+                    </h3>
+                    <p className={`text-3xl font-bold mb-2 ${accentMap[active.accent].text}`}>
+                        {active.focus.label}
+                    </p>
+                    <p className="text-xs text-neutral-400">
+                        {active.focus.note}
+                    </p>
+                </div>
+
+                {/* 4. STATS CARD */}
+                <div className="order-4 md:order-none bg-gradient-to-br from-blue-900 to-indigo-900 border border-blue-800 rounded-3xl p-6 flex flex-col justify-between min-h-[180px] relative overflow-hidden">
                     <div
                         className="absolute inset-0 opacity-10"
                         style={{
@@ -184,19 +197,6 @@ const ExperienceComponent = () => {
                             Internships across data, IoT, and web.
                         </p>
                     </div>
-                </div>
-
-                {/* 4. FOCUS CARD (now dynamic) */}
-                <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center">
-                    <h3 className="text-neutral-500 text-sm font-bold uppercase tracking-widest mb-1">
-                        Focus Area
-                    </h3>
-                    <p className={`text-3xl font-bold mb-2 ${accentMap[active.accent].text}`}>
-                        {active.focus.label}
-                    </p>
-                    <p className="text-xs text-neutral-400">
-                        {active.focus.note}
-                    </p>
                 </div>
 
             </div>

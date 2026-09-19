@@ -49,9 +49,7 @@ const AboutComponent = () => {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3 z-10">
-            <span className="px-4 py-1.5 bg-neutral-800 rounded-full text-xs font-medium text-neutral-300 border border-neutral-700">
-              📍 Based in India
-            </span>
+
             <span className="px-4 py-1.5 bg-green-900/30 text-green-400 rounded-full text-xs font-medium border border-green-800/50 flex items-center gap-2">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Available for work
             </span>
