@@ -15,7 +15,7 @@ const ContactComponent = () => {
         {
             name: 'LinkedIn',
             icon: <FaLinkedinIn className="text-2xl" />,
-            url: 'https://www.linkedin.com/in/shreyans-mehta-4b406a1b3/',
+            url: 'www.linkedin.com/in/shreyansmehta362',
             color: 'group-hover:text-blue-400'
         },
         {

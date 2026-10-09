@@ -98,7 +98,7 @@ const Base = () => {
                             <FaGithub className="text-2xl" />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/shreyans-mehta-4b406a1b3/"
+                            href="www.linkedin.com/in/shreyansmehta362"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-neutral-500 hover:text-blue-500 transition-all duration-300 hover:-translate-y-1"
